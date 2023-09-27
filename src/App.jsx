@@ -1,6 +1,20 @@
 import { useState } from 'react'
 import './App.css'
 
+const History = (props) => {
+  if (props.allClicks.length === 0) {
+    return (
+      <div>the app is usef by pressing the buttons</div>
+    )
+  }
+  return (
+    <div> button press history: {props.allClicks.join(' ')}
+    <p>Total: {props.allClicks.length}</p>
+    </div>
+
+  )
+}
+
 const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
@@ -11,14 +25,12 @@ const App = () => {
     setAll(allClicks.concat('L'))
     const newLeft = left + 1
     setLeft(newLeft)
-    setTotal(total + 1)
   }
 
     const handleRightClick = () => {
       setAll(allClicks.concat('R'))
       const newRight = right + 1
       setRight(newRight)
-      setTotal(total + 1)
   }
 
   return (
@@ -28,8 +40,7 @@ const App = () => {
         <button onClick={handleLeftClick}>left</button>
         <button onClick={handleRightClick}>right</button>
         {right}
-        <p>{allClicks.join(' ')}</p>
-        <p>Total: {total}</p>
+        <History allClicks={allClicks} />
       </div>
     </div>
   )
